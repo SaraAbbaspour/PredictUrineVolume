@@ -15,11 +15,15 @@ def FeatureTarget (Data):
     X = pd.DataFrame(X, columns=featureColumn)
     y = Data[:,-1].ravel()
     return X, y
+
+
 def EvalResult (yTest, yPred):
     print('coefficient of determination r2: %.2f' % metrics.r2_score(yTest, yPred))
     print('Mean absolute error: %.2f' % metrics.mean_absolute_error(yTest, yPred))
     print('Root mean squared error: %.2f' % np.sqrt(metrics.mean_squared_error(yTest, yPred)))
     return
+
+
 def PlotData (ytest, ypred, title_, ylabel):
     fig, ax = plt.subplots()
     ax.plot(ytest, 'b', label='Actual')
@@ -29,6 +33,7 @@ def PlotData (ytest, ypred, title_, ylabel):
     ax.legend()
     plt.show()
     return
+    
 
 # In[]: Import data
 UrineMedAgeSexLab_AllGroups = []
