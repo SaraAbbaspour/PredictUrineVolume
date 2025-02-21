@@ -218,11 +218,13 @@ model_xgb = XGBRegressor(max_depth=4,
 model_xgb_fitted = model_xgb.fit(X_train, y_train, sample_weight=sample_weight)
 y_Trpred_xgb = model_xgb_fitted.predict(X_train)
 y_pred_xgb = model_xgb_fitted.predict(X_test)
+
 # get Feature Importances
 FeatureImportances_xgb = np.reshape(model_xgb_fitted.feature_importances_, (-1, 1))
 importance_xgb = permutation_importance(model_xgb_fitted, X_train, y_train, scoring='neg_mean_squared_error').importances_mean
 importance_xgb = np.reshape(importance_xgb, (-1, 1))
 FeatureImportances_xgb = np.concatenate((featureColumn, FeatureImportances_xgb,importance_xgb), axis=1)
+
 # Validating the model and ploting the outpot
 EvalResult(y_train, y_Trpred_xgb)
 EvalResult(y_test, y_pred_xgb)
@@ -237,6 +239,7 @@ PlotData (y_test[:300], y_pred_xgb[:300], 'extreme gradient boosting', TargetCol
 # print('Regression coefficient:', model_LR.coef_)
 # print('Regression intercept:', model_LR.intercept_)
 # print('')
+
 # # f test to find significant variables
 # from sklearn.feature_selection import f_regression
 # FeatureImportances_LR = f_regression(X_train, y_train, center=True)
